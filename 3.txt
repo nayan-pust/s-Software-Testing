@@ -1,0 +1,43 @@
+#3. Write a program in “JAVA” or “C” to check whether a number or string is palindrome or not. N.B: Your program must not take any test case number such as 1 or 2 for the desired cases from the user. Program user will insert a number or string as input directly and the program will display the exact result in the output console.
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    char input[1000];
+    int len, i, isPalindrome;
+
+    while (1) {
+        printf("Enter a number or string (or 'q' to quit): ");
+        fgets(input, sizeof(input), stdin);
+
+        // Remove newline
+        len = strlen(input);
+        if (input[len - 1] == '\n') {
+            input[--len] = '\0';
+        }
+
+        // Quit if input is 'q' or 'Q'
+        if (len == 1 && (input[0] == 'q' || input[0] == 'Q')) {
+            printf("Exiting program.\n");
+            break;
+        }
+
+        isPalindrome = 1;
+        for (i = 0; i < len / 2; i++) {
+            if (tolower(input[i]) != tolower(input[len - 1 - i])) {
+                isPalindrome = 0;
+                break;
+            }
+        }
+
+        if (isPalindrome)
+            printf("%s is a palindrome.\n\n", input);
+        else
+            printf("%s is not a palindrome.\n\n", input);
+    }
+
+    return 0;
+}
+

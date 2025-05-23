@@ -1,0 +1,66 @@
+2. Write a program in “JAVA” or “C” that will take two ‘n’ integers as input until a particular operator and produce ‘n’ output. Sample input: 4 5 7 8 20 40 +; Sample output: 9 15 60.
+
+#include <stdio.h>
+
+int main() {
+    int n, i;
+    char c, op;
+
+    while (1) {
+        printf("Enter n (or 'q' to quit): ");
+        if (scanf("%d", &n) != 1) {
+            scanf(" %c", &c);
+            if (c == 'q' || c == 'Q') {
+                printf("Calculator exited.\n");
+                break;
+            } else {
+                printf("Invalid input. Try again.\n");
+                while ((c = getchar()) != '\n' && c != EOF); // clear buffer
+                continue;
+            }
+        }
+
+        if (n <= 1 || n % 2 != 0) {
+            printf("Enter an even number greater than 1.\n");
+            while ((c = getchar()) != '\n' && c != EOF);
+            continue;
+        }
+
+        int arr[n];
+        printf("Enter %d numbers: ", n);
+        for (i = 0; i < n; i++) {
+            scanf("%d", &arr[i]);
+        }
+
+        printf("Enter operator (+, -, *, /, %%): ");
+        scanf(" %c", &op);
+
+        printf("Output: ");
+        for (i = 0; i < n; i += 2) {
+            int a = arr[i];
+            int b = arr[i+1];
+            switch (op) {
+                case '+': printf("%d+%d=%d ", a, b, a + b); break;
+                case '-': printf("%d-%d=%d ", a, b, a - b); break;
+                case '*': printf("%d*%d=%d ", a, b, a * b); break;
+                case '/': 
+                    if (b == 0) printf("%d/%d=Err ", a, b);
+                    else printf("%d/%d=%d ", a, b, a / b);
+                    break;
+                case '%': 
+                    if (b == 0) printf("%d%%%d=Err ", a, b);
+                    else printf("%d%%%d=%d ", a, b, a % b);
+                    break;
+                default:
+                    printf("\nInvalid operator.\n");
+                    i = n; // stop loop
+            }
+        }
+        printf("\n");
+
+        while ((c = getchar()) != '\n' && c != EOF); // clear buffer
+    }
+
+    return 0;
+}
+

@@ -1,0 +1,23 @@
+8. Write a program in “JAVA” or “C” that will read a input.txt file containing n positive integers and calculate addition, subtraction, multiplication and division in separate output.txt file. Sample input: 5 5 9 8; Sample output: Case-1: 10 0 25 1; Case-2: 17 1 72 1.
+#include <stdio.h>
+
+int main() {
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+
+    int a, b;
+
+    while (scanf("%d %d", &a, &b) == 2) {
+        printf("Sum of %d and %d is %d\n", a, b, a + b);
+        printf("Subtraction of %d and %d is %d\n", a, b, a - b);
+        printf("Multiplication of %d and %d is %d\n", a, b, a * b);
+        if (b != 0)
+            printf("Division of %d and %d is %.2f\n", a, b, (float)a / b);
+        else
+            printf("Division of %d and %d is undefined (division by zero)\n", a, b);
+
+        printf("------------------------\n");
+    }
+
+    return 0;
+}

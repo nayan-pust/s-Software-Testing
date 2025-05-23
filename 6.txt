@@ -1,0 +1,47 @@
+#6 Write a program in “JAVA” or “C” that will find sum and average of array using do while loop and user-defined function.
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    char ch;
+    
+    while (1) {
+        int n, i, sum = 0;
+        float average;
+        int arr[100];
+
+        printf("Enter array size (or 'q' to quit): ");
+        
+        if (scanf("%d", &n) != 1) {
+            scanf(" %c", &ch);
+            if (ch == 'q' || ch == 'Q') {
+                printf("Calculator exited.\n");
+                break;
+            } else {
+                printf("Invalid input. Try again.\n");
+                while ((ch = getchar()) != '\n' && ch != EOF); // flush buffer
+                continue;
+            }
+        }
+
+        if (n <= 0 || n > 100) {
+            printf("Invalid array size.\n");
+            continue;
+        }
+
+        printf("Enter %d array elements: ", n);
+        for (i = 0; i < n; i++) {
+            scanf("%d", &arr[i]);
+            sum += arr[i];
+        }
+
+        average = (float)sum / n;
+
+        printf("Sum : %d\n", sum);
+        printf("Average : %.2f\n\n", average);
+
+        while ((ch = getchar()) != '\n' && ch != EOF); // clear input buffer
+    }
+
+    return 0;
+}

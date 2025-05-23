@@ -1,0 +1,52 @@
+#1 Write a program in "JAVA" or "C" to develop a simple calculator that would be able to a number, an operator (addition/subtraction/multiplication/ division/modulo) and another number consecutively as input and the program will display the output after pressing "=" sign. Sample input: 1+2; 8%4; Sample output: 1+2=3; 8%4=0.
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    int num1, num2, result;
+    char op;
+
+    printf("Simple Calculator (Type 'q' to quit)\n");
+
+    while (1) {
+        printf("\nEnter expression (e.g., 1+2): ");
+
+        if (scanf("%d %c %d", &num1, &op, &num2) != 3) 
+        {
+            char ch;
+            scanf("%c", &ch); // get the non-numeric input
+            if (ch == 'q' || ch == 'Q') {
+                printf("Exiting calculator.\n");
+                break;
+            } else {
+                printf("Invalid input. Try again.\n");
+                // flush the input buffer
+                while ((ch = getchar()) != '\n' && ch != EOF);
+                continue;
+            }
+        }
+
+        if ((op == '/' || op == '%') && num2 == 0) {
+            printf("Error: Division or modulo by zero is not allowed.\n");
+            continue;
+        }
+
+        switch (op) {
+            case '+': result = num1 + num2; break;
+            case '-': result = num1 - num2; break;
+            case '*': result = num1 * num2; break;
+            case '/': result = num1 / num2; break;
+            case '%': result = num1 % num2; break;
+            default:
+                printf("Invalid operator. Use +, -, *, /, %%.\n");
+                continue;
+        }
+
+        printf("%d%c%d=%d\n", num1, op, num2, result);
+    }
+
+    return 0;
+}
